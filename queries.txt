@@ -13,6 +13,26 @@ FROM (
 
 COPY(SELECT row_to_json(results)
 FROM (
-  SELECT id, screen_name, name, description, followers_count, friends_count, statuses_count
-  FROM accounts
+  SELECT DISTINCT(a.id), a.screen_name, a.name, a.description, a.followers_count, a.friends_count,
+	a.statuses_count
+  FROM accounts a INNER JOIN tweets t
+  ON a.id = t.author_id
+  AND t.compound NOT BETWEEN -0.5 AND 0.5
 ) results) TO 'D:\FIIT\ING\1_Semester\PDT\PDT_4\accounts.json' WITH (FORMAT text, HEADER FALSE);
+
+db.tweets.find({"parent_id": "1243427980199641088"}, {_id:0, name:1, screen_name:1, content:1, hashtags:1}).limit(10)
+
+db.tweets.aggregate([
+   { $match : { screen_name : "Marndin12" } },
+   { $sort : { _id : -1} },
+   { $limit : 10 },
+   {
+     $lookup:
+       {
+         from: "accounts",
+         localField: "account_id",
+         foreignField: "id",
+         as: "account_info"
+       }
+  }
+])
