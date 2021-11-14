@@ -1,0 +1,18 @@
+COPY(SELECT row_to_json(results)
+FROM (
+  SELECT t.id, t.content, t.parent_id, t.happened_at, t.retweet_count, t.favorite_count, 
+	a.id AS account_id, a.name, a.screen_name,
+	array_agg(h.value) as hashtags 
+	FROM tweets t 
+	INNER JOIN tweet_hashtags th ON t.id = th.tweet_id 
+	INNER JOIN hashtags h ON th.hashtag_id = h.id 
+	INNER JOIN accounts a ON t.author_id = a.id
+	AND t.compound NOT BETWEEN -0.5 AND 0.5
+	GROUP BY t.id, a.id, a.name, a.screen_name
+) results) TO 'D:\FIIT\ING\1_Semester\PDT\PDT_4\tweets.json' WITH (FORMAT text, HEADER FALSE);
+
+COPY(SELECT row_to_json(results)
+FROM (
+  SELECT id, screen_name, name, description, followers_count, friends_count, statuses_count
+  FROM accounts
+) results) TO 'D:\FIIT\ING\1_Semester\PDT\PDT_4\accounts.json' WITH (FORMAT text, HEADER FALSE);

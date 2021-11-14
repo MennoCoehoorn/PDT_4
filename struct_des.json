@@ -1,0 +1,42 @@
+// Prvý návrh
+Tweets
+  {
+    "id":"1564980919",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. #latin #deadlanguage #history",
+    "screenName": "yaBoiCicero",
+    "name":"Marcus Tullius Cicero",
+    "happened_at": "0002-01-24 20:59:19+01",
+    "retweet_count": 251,
+    "parent_id": "899591098",
+    "hashtags": ["latin", "deadlanguage", "history"],
+  }
+
+// Druhý návrh
+Tweets
+  {
+    "id":"1564980919",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. #latin #deadlanguage #history",
+    "screenName": "yaBoiCicero",
+    "name":"Marcus Tullius Cicero",
+    "account_id": "2598491951",
+    "happened_at": "0002-01-24 20:59:19+01",
+    "retweet_count": 251,
+    "parent_id": "899591098",
+    "hashtags": ["latin", "deadlanguage", "history"],
+  }
+
+Accounts
+  {
+    "id": "2598491951",
+    "screenName": "yaBoiCicero",
+    "name":"Marcus Tullius Cicero",
+    "description": "Big brain philosopher",
+    "followers_count": 98746,
+    "friends_count": 505,
+    "status_count": 237
+  }
+
+
+
+
+
